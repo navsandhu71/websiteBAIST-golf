@@ -1,0 +1,34 @@
+﻿@page
+@model GolfClubWebsite.Pages.Clerk.ClerkPortalModel
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Clerk Page";
+}
+
+@section styleSection
+{
+<style>
+    .CoverPage {
+        background-image: url("../Images/ClerkWelcomePage.jpg");
+        /* Full height */
+        height: 100%;
+        /* Center and scale the image nicely */
+
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
+    
+}
+
+@section headerContent
+{
+    <h1>Welcome to the Clerk Portal of Club BAIST System!</h1>
+}
+
+@section navigationContent
+{
+    <button><a href="~/Clerk/ClerkBookTeeTime">Book Tee Times</a></button>
+    <button><a href="~/Clerk/ClerkModifyTeeTime">Modify Tee Times</a></button>
+}

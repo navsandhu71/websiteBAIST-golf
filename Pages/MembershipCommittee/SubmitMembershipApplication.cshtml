@@ -1,0 +1,293 @@
+﻿@page
+@model GolfClubWebsite.Pages.MembershipCommittee.SubmitMembershipApplicationModel
+
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "SubmitMembershipApplication Page";
+}
+
+@section headerContent
+{
+    <h1>Received a new application? Enter the details below to store it in the system!</h1>
+}
+
+@section navigationContent
+{
+
+    <a href="~/MembershipCommittee/MembershipCommittee">Back to MembershipCommittee Portal</a>
+}
+
+@section styleSection
+{
+<style>
+    table, td, th, tr {
+        border: 1px solid Black;
+        border-collapse: collapse;
+        text-align: left;
+        padding: 8px;
+        background-color: whitesmoke;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 10%;
+    }
+
+    .CoverPage {
+        background-image: url("../Images/SubmitApplications.png");
+        /* Full height */
+        height: 100%;
+        /* Center and scale the image nicely */
+
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
+
+}
+
+@section scriptcontent
+{
+
+    <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+
+            var dtToday = new Date();
+
+            var month = dtToday.getMonth() + 1;
+
+            var day = dtToday.getDate();
+
+
+            var year = dtToday.getFullYear();
+
+            if (month < 10)
+                month = '0' + month.toString();
+
+            if (day < 10)
+                day = '0' + day.toString();
+
+            var maxDate = year + '-' + month + '-' + day;
+
+            $('#DateOfBirth').attr('max', maxDate);
+        })
+    </script>
+
+    <script type="text/javascript">
+        function Validate(aForm) {
+            var LastName = aForm.LastName.value;
+            var FirstName = aForm.FirstName.value;
+            var Address = aForm.Address.value;
+            var PostalCode = aForm.PostalCode.value;
+            var Phone = aForm.Phone.value;
+            var Email = aForm.Email.value;
+            var DateOfBirth = aForm.DateOfBirth.value;
+            var Occupation = aForm.Occupation.value;
+            var CompanyName = aForm.CompanyName.value;
+            var CompanyAddress = aForm.CompanyAddress.value;
+            var CompanyPostalCode = aForm.CompanyPostalCode.value;
+            var CompanyPhone = aForm.CompanyPhone.value;
+            var ApplicationDate = aForm.ApplicationDate.value;
+            var FirstShareholderName = aForm.FirstShareholderName.value;
+            var SecondShareholderName = aForm.SecondShareholderName.value;
+
+            if (LastName == '' || LastName.length <= 0) {
+                alert("Last Name is Required!");
+                return false;
+            }
+            if (FirstName == '' || FirstName.length <= 0) {
+                alert("First Name is Required!");
+                return false;
+            }
+            if (Address == '' || Address.length <= 0) {
+                alert("Address is Required!");
+                return false;
+            }
+            if (PostalCode == '' || PostalCode.length <= 0) {
+                alert("Postal Code is Required!");
+                return false;
+            }
+            if (Phone == '' || Phone.length <= 0) {
+                alert("Phone is Required!");
+                return false;
+            }
+            if (Email == '' || Email.length <= 0) {
+                alert("Email is Required!");
+                return false;
+            }
+
+            if (DateOfBirth == '' || DateOfBirth.length <= 0) {
+                alert("Date Of Birth is Required!");
+                return false;
+            }
+            if (Occupation == '' || Occupation.length <= 0) {
+                alert("Occupation is Required!");
+                return false;
+            }
+            if (CompanyName == '' || CompanyName <= 0) {
+                alert("Company Name is Required!");
+                return false;
+            }
+            if (CompanyAddress == '' || CompanyAddress <= 0) {
+                alert("Company Address is Required!");
+                return false;
+            }
+            if (CompanyPostalCode == '' || CompanyPostalCode <= 0) {
+                alert("Company Postal Code is Required!");
+                return false;
+            }
+            if (CompanyPhone == '' || CompanyPhone <= 0) {
+                alert("Company Phone is Required!");
+                return false;
+            }
+
+            if (ApplicationDate == '' || ApplicationDate.length <= 0) {
+                alert("Application Date is Required!");
+                return false;
+            }
+
+            if (FirstShareholderName == '' || FirstShareholderName <= 0) {
+                alert("First Shareholder Name is Required!");
+                return false;
+            }
+            if (SecondShareholderName == '' || SecondShareholderName <= 0) {
+                alert("Second Shareholder Name is Required!");
+                return false;
+            }
+            return true;
+        }
+    </script>
+}
+
+<form name="MembershipApplication" method="post" onsubmit="Validate(window.document.MembershipApplication);">
+    <table>
+        <tr>
+            <td>
+                LastName:
+                <input type="text" name="LastName" value="@Model.LastName" />
+                @Html.ValidationMessage("LastName")
+            </td>
+
+            <td>
+                FirstName:
+                <input type="text" name="FirstName" value="@Model.FirstName" />
+                @Html.ValidationMessage("FirstName")
+
+            </td>
+            <td>
+                RequestedRole:
+                <select name="RequestedRole" id="RequestedRole">
+                    <option value="Shareholder">Shareholder</option>
+                    <option value="Associate">Associate</option>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Address:
+                <input type="text" name="Address" value="@Model.Address" />
+                @Html.ValidationMessage("Address")
+            </td>
+
+            <td>
+                PostalCode:
+                <input type="text" name="PostalCode" value="@Model.PostalCode" />
+                @Html.ValidationMessage("PostalCode")
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>
+                Phone:
+                <input type="text" name="Phone" value="@Model.Phone" />
+                @Html.ValidationMessage("Phone")
+            </td>
+
+            <td>
+                AlternatePhone:
+                <input type="text" name="AlternatePhone" value="@Model.AlternatePhone" />
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                Email:
+                <input type="email" name="Email" value="@Model.Email" />
+                @Html.ValidationMessage("Email")
+            </td>
+
+            <td>
+                DateOfBirth:
+                <input type="date" name="DateOfBirth" id="DateOfBirth" value="@Model.DateOfBirth" />
+                @Html.ValidationMessage("DateOfBirth")
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>
+                Occupation:
+                <input type="text" name="Occupation" value="@Model.Occupation" />
+                @Html.ValidationMessage("Occupation")
+            </td>
+            <td>
+                CompanyName:
+                <input type="text" name="CompanyName" value="@Model.CompanyName" />
+                @Html.ValidationMessage("CompanyName")
+            </td>
+
+
+        </tr>
+
+        <tr>
+            <td>
+                CompanyAddress:
+                <input type="text" name="CompanyAddress" value="@Model.CompanyAddress" />
+                @Html.ValidationMessage("CompanyAddress")
+            </td>
+            <td>
+                CompanyPostalCode:
+                <input type="text" name="CompanyPostalCode" value="@Model.CompanyPostalCode" />
+                @Html.ValidationMessage("CompanyPostalCode")
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                CompanyPhone:
+                <input type="text" name="CompanyPhone" value="@Model.CompanyPhone" />
+                @Html.ValidationMessage("CompanyPhone")
+            </td>
+            <td>
+                ApplicationDate:
+                <input type="date" name="ApplicationDate" value="@Model.ApplicationDate" />
+                @Html.ValidationMessage("ApplicationDate")
+            </td>
+        </tr>
+        <tr>
+            <td>
+                FirstShareholderName:
+                <input type="text" name="FirstShareholderName" value="@Model.FirstShareholderName" />
+                @Html.ValidationMessage("FirstShareholderName")
+            </td>
+            <td>
+                SecondShareholderName:
+                <input type="text" name="SecondShareholderName" value="@Model.SecondShareholderName" />
+                @Html.ValidationMessage("SecondShareholderName")
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                <input type="submit" name="Submit" value="SubmitMembershipApplication" />
+            </td>
+
+        </tr>
+
+    </table>
+</form>
+<p style="align-content:center; text-align: center; justify-content: center; justify-items: center;">@Model.Message</p>

@@ -1,0 +1,88 @@
+﻿@page
+@model GolfClubWebsite.Pages.ViewPlayerHandicapModel
+
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "PlayerHandicap Page";
+}
+
+@section headerContent
+{
+    <h1>Welcome to the Player Handicap Page!</h1>
+}
+
+
+@section navigationContent
+{
+
+    <a href="~/Welcome">Back to Member Portal</a>
+    <a href="~/Logout">Logout</a>
+}
+
+@section styleSection
+{
+<style>
+
+    table, td, th, tr {
+        border: 1px solid Black;
+        border-collapse: collapse;
+        text-align: left;
+        padding: 8px;
+        background-color: whitesmoke;
+    }
+
+    .CoverPage {
+        background-image: url("./Images/PlayerHandicapImage.jpg");
+        /* Full height */
+        height: 100%;
+        /* Center and scale the image nicely */
+
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
+}
+
+<form name="PlayerHandicap" method="post">
+    @if (Model.Last20ScoresList.Count >= 20)
+    {
+        <table>
+            <tr>
+                <td colspan="25">
+                    Club BAIST Member Handicap Index
+                    <br />
+                    <br />
+                    Date: @Model._Player.HandicapCalculationDate
+                </td>
+            </tr>
+            <tr>
+                <th>Member Name</th>
+                <th>Handicap Index</th>
+                <th>Last 20 Average</th>
+                <th>Best 8 Average</th>
+                <th colspan="20">Last 20 Round Scores</th>
+            </tr>
+
+            <tr>
+                <td>@Model.playername</td>
+                <td>@String.Format("{0:0.0}", @Model._Player.PlayerHandicapIndex)</td>
+                <td>@String.Format("{0:0.00}", @Model.Last20Average)</td>
+                <td>@String.Format("{0:0.00}", @Model.Best8Average)</td>
+                @for (int i = 0; i < Model.Last20ScoresList.Count; ++i)
+                {
+
+                    <td>@String.Format("{0:0.00}", @Model.Last20ScoresList[i])</td>
+
+                }
+            </tr>
+
+
+
+        </table>
+    }
+    else
+    {
+        <h1>You should have played atleast 20 golf rounds to get Handicap Index!</h1>
+    }
+</form>

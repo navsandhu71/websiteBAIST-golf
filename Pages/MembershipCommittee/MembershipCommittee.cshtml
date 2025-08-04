@@ -1,0 +1,34 @@
+﻿@page
+@model GolfClubWebsite.Pages.MembershipCommittee.MembershipCommitteeModel
+
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "MembershipCommittee Page";
+}
+
+@section styleSection
+{
+<style>
+    .CoverPage {
+        background-image: url("../Images/MembershipCommittee.jpeg");
+        /* Full height */
+        height: 100%;
+        /* Center and scale the image nicely */
+
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
+}
+
+@section headerContent
+{
+    <h1>Welcome to the Membership Committee Portal!</h1>
+}
+
+@section navigationContent
+{
+    <button><a href="~/MembershipCommittee/SubmitMembershipApplication">SubmitMembershipApplications</a></button>
+    <button><a href="~/MembershipCommittee/ReviewMembershipApplications">ReviewMembershipApplications</a></button>
+}

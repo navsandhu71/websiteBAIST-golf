@@ -1,0 +1,96 @@
+﻿
+main {
+    /* background-color: whitesmoke;*/
+   
+    width: 100%;
+    /*align-content: center;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    text-align: center;*/
+    position: fixed;
+    left: 0%;
+    top: 15%;
+    bottom: 90%;
+    height: 75%;
+    overflow: auto;
+}
+header {
+    background-color: white;
+    width: 100%;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+ text-align: center;
+   position: fixed;
+   left:0%;
+   top: 0%;
+   bottom: 10%;
+   height: 10%;
+}
+
+nav {
+    background-color: white;
+    width: 100%;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    position: fixed;
+    left: 0%;
+    top: 10%;
+    bottom: 15%;
+    height: 5%;
+    text-align: center;
+}
+footer
+{
+   top: 90%;
+    bottom: 100%;
+    position: fixed;
+    width:100%;
+    height: 10%;
+    left: 0%;
+    background-color: white;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    
+}/*
+table, td, th, tr {
+    border: 1px solid Black;
+    border-collapse: collapse;
+    text-align: center;
+    padding: 8px;
+    border-collapse: collapse;
+    background-color: whitesmoke;
+}
+
+    table tr:not(:first-child):hover {
+        background-color: grey
+    }
+
+tr {
+    cursor: pointer;
+    transition: all .25s ease-in-out
+}
+
+.selected {
+    background-color: maroon;
+    color: white;
+}*/
+ 
+/*.CoverPage {*/
+    /* The image used */
+    /*background-image: url("../Images/Image2.jpeg");*/
+    /* Full height */
+    /*height: 100%;*/
+    /* Center and scale the image nicely */
+    /*   background-position: inherit;*/
+    /*background-repeat: no-repeat;
+    background-size: cover;
+}*/
+
+  

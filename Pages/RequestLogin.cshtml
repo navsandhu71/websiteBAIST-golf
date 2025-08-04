@@ -1,0 +1,100 @@
+﻿@page
+@model GolfClubWebsite.Pages.RequestLoginModel
+
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Login Page";
+}
+
+@section headerContent
+{
+    <h1>A Club BAIST Member? Enter the details below to login:</h1>
+}
+
+@section scriptcontent
+{
+    <script type="text/javascript">
+      function Validate(aForm) {
+          var UserName = aForm.UserName.value;
+          var Password = aForm.Password.value;
+
+          if (UserName == '' || UserName.length <= 0) {
+              alert("Enter a valid UserName!");
+              return false;
+          }
+
+          if (Password == '' || Password.length <= 0) {
+              alert("Enter a valid Password!");
+              return false;
+          }
+
+          return true;
+      }
+    </script>
+}
+
+@section styleSection
+{
+<style>
+    .CoverPage {
+        background-image: url("./Images/LoginPageImage1.jpeg");
+        /* Full height */
+        height: 100%;
+        /* Center and scale the image nicely */
+        /*   background-position: inherit;*/
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    table {
+        background-color: whitesmoke;
+    }
+
+    table, td, th, tr {
+        border: 1px solid Black;
+        border-collapse: collapse;
+        text-align: center;
+        padding: 8px;
+        border-collapse: collapse;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top:5%;
+        margin-bottom: auto;
+    }
+</style>
+
+}
+
+<form name="LoginForm" method="post" onsubmit="return Validate(window.document.LoginForm);">
+    <table>
+        <tr>
+            <td>UserName:</td>
+            <td>
+                <input type="text" name="UserName" value="@Model.UserName" />
+                @Html.ValidationMessage("UserName")
+            </td>
+        </tr>
+        <tr>
+            <td>Password: </td>
+            <td>
+                <input type="password" name="Password" value="@Model.Password" />
+                @Html.ValidationMessage("Password")
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" name="Submit" value="Submit" /></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <a href="SignUpPage" style="text-align: center; justify-content: center; align-items: center;">New Member? Sign up to continue</a>
+
+            </td>
+        </tr>
+    </table>
+   
+
+
+</form>
+
+
+@Model.Message

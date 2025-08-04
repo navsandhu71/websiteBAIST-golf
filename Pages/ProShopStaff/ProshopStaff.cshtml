@@ -1,0 +1,33 @@
+﻿@page
+@model GolfClubWebsite.Pages.ProShopStaff.ProshopStaffModel
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "ProshopStaff Page";
+}
+
+@section styleSection
+{
+<style>
+    .CoverPage {
+        background-image: url("../Images/ProShopWelcomePage.jpg");
+        /* Full height */
+        height: 100%;
+        /* Center and scale the image nicely */
+
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
+}
+
+@section headerContent
+{
+    <h1>Welcome to the ProShop Staff Portal!</h1>
+}
+
+@section navigationContent
+{
+    <button><a href="~/ProShopStaff/ProShopStaffPortal">Book Tee Times</a></button>
+    <button><a href="~/ProShopStaff/ProShopModifyTeeTimes">Modify Tee Times</a></button>
+}

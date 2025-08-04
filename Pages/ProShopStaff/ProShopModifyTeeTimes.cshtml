@@ -1,0 +1,243 @@
+﻿@page
+@model GolfClubWebsite.Pages.ProShopStaff.ProShopModifyTeeTimesModel
+
+
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "ProshopStaff";
+}
+
+
+@section headerContent
+{
+    <h1>Welcome to the Modify Tee Time Page of Club BAIST System</h1>
+}
+@section navigationContent
+{
+
+    <a href="~/ProShopStaff/ProshopStaff">Back to ProShop Staff Portal</a>
+}
+
+
+@section scriptcontent
+{
+    <script type="text/javascript">
+        function Validate(aForm) {
+            var InputFieldTime = aForm.InputFieldTime.value;
+
+
+            if (InputFieldTime.length <= 0) {
+                alert("A valid date required to cancel tee time!");
+                return false;
+            }
+
+
+            var InputFieldDate = aForm.InputFieldDate.value;
+
+            if (InputFieldDate.length <= 0) {
+                alert("A valid time required to cancel tee time!");
+                return false;
+            }
+
+            return true;
+        }
+
+        function ValidateMemberID(aForm) {
+            var MemberID = aForm.MemberNumber.value;
+
+            if (MemberID.length <= 0 || MemberID == '') {
+                alert("A valid memberID required!");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+}
+
+@section styleSection
+{
+<style>
+    table {
+        background-color: whitesmoke;
+    }
+
+    table, td, th, tr {
+        border: 1px solid Black;
+        border-collapse: collapse;
+        text-align: center;
+        padding: 8px;
+        border-collapse: collapse;
+    }
+
+        table tr:not(:first-child):hover {
+            background-color: rosybrown
+        }
+
+    tr {
+        cursor: pointer;
+        transition: all .25s ease-in-out
+    }
+
+    .selected {
+        background-color: maroon;
+        color: white;
+    }
+
+    .CoverPage {
+        background-image: url("../Images/BookTeeTimeImages.webp");
+        /* Full height */
+        height: 100%;
+        /* Center and scale the image nicely */
+        /*   background-position: inherit;*/
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
+}
+
+
+<form name="FindMember" method="post" onsubmit="ValidateMemberID(window.document.FindMember);">
+    <table>
+        <tr>
+            <td>Member Number: </td>
+            <td>
+                <input type="text" name="MemberNumber" value="@Model.MemberNumber" />
+                @Html.ValidationMessage("MemberNumber")
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" name="Submit" value="Find Member" />
+            </td>
+        </tr>
+    </table>
+
+</form>
+
+
+
+@if (Model.MemberName != null)
+{
+    <table>
+        <tr>
+            <td>Member Number: </td>
+            <td>@Model.PlayerNumber</td>
+        </tr>
+        <tr>
+            <td>Member Name: </td>
+            <td>@Model.MemberName</td>
+        </tr>
+        <tr>
+            <td>Membership Level: </td>
+            <td>@Model.MembershipLevel</td>
+        </tr>
+        <tr>
+            <td>Member Role: </td>
+            <td>@Model.MemberRole</td>
+        </tr>
+
+
+    </table>
+
+
+    <form name="FindBookedTimes" method="post" onsubmit="Validate();">
+        <input type="submit" name="Submit" value="ShowBookedTeeTimes" />
+
+    </form>
+
+
+    @if (Model.BookedTimes.Count > 0)
+    {
+        <table id="table">
+            <thead>Select a time to Cancel: </thead>
+            <tr>
+                <th>GolfDate</th>
+                <th>GolfDay</th>
+                <th>GolfTime</th>
+                <th>Check-In Status</th>
+            </tr>
+            @for (int i = 0; i < Model.BookedTimes.Count; ++i)
+            {
+                <tr>
+
+                    <td>@Model.BookedTimes[i].Date</td>
+
+
+
+                    <td>@Model.BookedTimes[i].Day</td>
+
+
+                    <td>@Model.BookedTimes[i].Time</td>
+
+                    <td>@Model.BookedTimes[i].status</td>
+                </tr>
+            }
+        </table>
+
+
+        <script>
+            //get selected row
+            //display selected row data in text input
+            function addRowHandlers() {
+
+                var table = document.getElementById("table"), rIndex;
+
+                for (var i = 0; i < table.rows.length; i++) {
+                    table.rows[i].onclick = function () {
+
+                        if (typeof rIndex !== "undefined") {
+                            table.rows[rIndex].classList.toggle("selected");
+                        }
+                        rIndex = this.rowIndex;
+                        this.classList.toggle("selected");
+                        console.log(rIndex);
+
+                        document.getElementById("InputFieldDate").value = this.cells[0].innerHTML;
+                        document.getElementById("InputFieldTime").value = this.cells[2].innerHTML;
+                    };
+                }
+            }
+            window.onload = addRowHandlers;
+        </script>
+    }
+
+    <br />
+    <br />
+    <form name="CancelBooking" method="post" onsubmit="Validate(window.document.CancelBooking);">
+        <table>
+            <tr>
+                <td>MemberNumber: </td>
+                <td>
+                    <input type="text" name="InputFieldMember" id="InputFieldMember" value="@Model.PlayerNumber" />
+                </td>
+            </tr>
+            <tr>
+                <td>GolfDate: </td>
+                <td>
+                    <input type="text" name="InputFieldDate" id="InputFieldDate" value="@Model.InputFieldDate" />
+                    @Html.ValidationMessage("InputFieldDate")
+                </td>
+            <tr>
+                <td>GolfTime: </td>
+                <td>
+                    <input type="time" name="InputFieldTime" id="InputFieldTime" value="@Model.InputFieldTime" />
+                    @Html.ValidationMessage("InputFieldTime")
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" name="Submit" value="CheckIn" />
+                </td>
+                <td>
+                    <input type="submit" name="Submit" value="CancelTeeTime" />
+                </td>
+            </tr>
+        </table>
+
+
+    </form>
+
+    @Model.Message
+}

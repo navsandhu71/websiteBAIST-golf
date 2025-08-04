@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>@ViewData["Title"]</title>
+
+    <link rel="stylesheet" href="~/css/StyleSheet.css" />
+    @RenderSection("styleSection", required: false)
+
+    @RenderSection("scriptcontent", required: false)
+
+
+</head>
+<body class="CoverPage">
+    @RenderSection("BackgroundImage", required: false)
+    <header class="HeaderImage">
+        @RenderSection("headerContent", required: false)
+    </header>
+
+    <nav>
+        @RenderSection("navigationContent", required: false)
+    </nav>
+
+    <main>
+        
+            @RenderBody()
+          
+    </main>
+    <footer>
+
+        &copy Prabhjot Kaur BAIST 2022
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,124 @@
+﻿@page
+@model GolfClubWebsite.Pages.SignUpPageModel
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "SignUp Page";
+}
+
+@section headerContent
+{
+    <h1>A New Club BAIST Member? Fill in the details below to Sign Up:</h1>
+}
+
+@section scriptcontent
+{
+    <script type="text/javascript">
+        function Validate(aForm) {
+            var UserName = aForm.UserName.value;
+            var Password = aForm.Password.value;
+            var MemberName = aForm.MemberName.value;
+            var MemberNumber = aForm.MemberNumber.value;
+            if (MemberName == '' || MemberName.length <= 0) {
+                alert("Enter a valid Member Name!");
+                return false;
+            }
+
+            if (MemberNumber == '' || MemberNumber.length <= 0) {
+                alert("Enter a valid Member Number!");
+                return false;
+            }
+
+            if (UserName == '' || UserName.length <= 0) {
+                alert("Enter a valid UserName!");
+                return false;
+            }
+
+            if (Password == '' || Password.length <= 0) {
+                alert("Enter a valid Password!");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+
+
+}
+
+@section styleSection
+{
+<style>
+    table {
+        background-color: whitesmoke;
+    }
+
+    table, td, th, tr {
+        border: 1px solid Black;
+        border-collapse: collapse;
+        text-align: center;
+        padding: 8px;
+        border-collapse: collapse;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 10%;
+        margin-bottom: auto;
+    }
+    .CoverPage {
+        background-image: url("./Images/SignUpPageImage.jpeg");
+        /* Full height */
+        height: 100%;
+        /* Center and scale the image nicely */
+      
+        background-repeat: no-repeat;
+        background-size: cover;
+        
+    }
+</style>
+
+}
+
+
+<form name="SignUpForm" method="post" onsubmit="Validate(window.document.SignUpForm);">
+    <table>
+        <tr>
+            <td>Member Name: </td>
+            <td>
+                <input type="text" name="MemberName" value="@Model.MemberName" />
+                @Html.ValidationMessage("MemberName")
+            </td>
+        </tr>
+        <tr>
+            <td>Member Number: </td>
+            <td>
+                <input type="text" name="MemberNumber" value="@Model.MemberNumber" />
+                @Html.ValidationMessage("MemberNumber")
+            </td>
+        </tr>
+        <tr>
+            <td>UserName provided by the membership committee</td>
+            <td>
+                <input type="text" name="UserName" value="@Model.UserName" />
+                @Html.ValidationMessage("UserName")
+            </td>
+        </tr>
+        <tr>
+            <td>Enter new password: </td>
+            <td>
+                <input type="text" name="Password" value="@Model.Password" />
+                @Html.ValidationMessage("Password")
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" name="Submit" value="Sign Up" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button><a href="~/RequestLogin">Go to the Login Page</a></button>
+            </td>
+        </tr>
+    </table>
+</form>
+@Model.Message

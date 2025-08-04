@@ -1,0 +1,326 @@
+﻿@page
+@model GolfClubWebsite.Pages.StandingTeeTimeRequestsModel
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "StandingTeeTimeRequest";
+}
+
+
+@section headerContent
+{
+    <h1>Submit a Standing Tee Time Request? Fill in the details below:</h1>
+}
+
+
+@section navigationContent
+{
+
+    <a href="~/Welcome">Back to Member Portal</a>
+    <a href="~/Logout">Logout</a>
+}
+
+@section styleSection
+{
+<style>
+    table, td, th, tr {
+        border: 1px solid Black;
+        border-collapse: collapse;
+        text-align: left;
+        padding: 8px;
+        background-color: whitesmoke;
+    }
+
+    .CoverPage {
+        background-image: url("./Images/StandingTeeTimeImage1.jpg");
+        /* Full height */
+        height: 100%;
+        /* Center and scale the image nicely */
+
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
+}
+
+
+<div style="float:right">
+    <form name="MemberDetails" method="post">
+    </form>
+</div>
+
+@section scriptcontent
+{
+    <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+
+            var dtToday = new Date();
+
+            var month = dtToday.getMonth() + 1;
+
+            var day = dtToday.getDate() + 7;
+
+            //var day1 = day + 5;
+
+            var year = dtToday.getFullYear();
+
+            if (month < 10)
+                month = '0' + month.toString();
+
+            if (day < 10)
+                day = '0' + day.toString();
+
+            var minDate = year + '-' + month + '-' + day;
+
+            // var maxDate = year + '-' + month + '-' + day1;
+
+            $('#dateControl').attr('min', minDate);
+            $('#dateControl1').attr('min', minDate);
+            //$('#dateControl').attr('max', maxDate);
+        })
+    </script>
+    <script type="text/javascript">
+
+
+        function ValidateMemberName() {
+            var MemberName = window.document.getElementById("MemberName").value;
+
+            if (MemberName == '' || MemberName.length <= 0) {
+                alert("Member Name is Required!");
+                return false;
+            }
+
+            return true;
+        }
+
+        function Validate() {
+            var FirstMemberNumber = window.document.getElementById("FirstMemberNumber").value;
+            var SecondMemberNumber = window.document.getElementById("SecondMemberNumber").value;
+            var ThirdMemberNumber = window.document.getElementById("ThirdMemberNumber").value;
+            var ForthMemberNumber = window.document.getElementById("ForthMemberNumber").value;
+
+            var FirstMemberName = window.document.getElementById("FirstMemberName").value;
+            var SecondMemberName = window.document.getElementById("SecondMemberName").value;
+            var ThirdMemberName = window.document.getElementById("ThirdMemberName").value;
+            var ForthMemberName = window.document.getElementById("ForthMemberName").value;
+
+            var RequestedTeeTime = window.document.getElementById("RequestedTeeTime").value;
+            var RequestedStartDate = window.document.getElementById("dateControl").value;
+            var RequestedEndDate = window.document.getElementById("dateControl1").value;
+
+            if (FirstMemberNumber == '' || FirstMemberNumber <= 0) {
+                alert("First Member Number is Required!");
+                return false;
+            }
+            if (SecondMemberNumber == '' || SecondMemberNumber <= 0) {
+                alert("Second Member Number is Required!");
+                return false;
+            }
+            if (ThirdMemberNumber == '' || ThirdMemberNumber <= 0) {
+                alert("Third Member Number is Required!");
+                return false;
+            }
+            if (ForthMemberNumber == '' || ForthMemberNumber <= 0) {
+                alert("Forth Member Number is Required!");
+                return false;
+            }
+            if (FirstMemberName == '' || FirstMemberName <= 0) {
+                alert("First Member Name is Required!");
+                return false;
+            }
+            if (SecondMemberName == '' || SecondMemberName <= 0) {
+                alert("Second Member Name is Required!");
+                return false;
+            }
+            if (ThirdMemberName == '' || ThirdMemberName <= 0) {
+                alert("Third Member Name is Required!");
+                return false;
+            }
+            if (ForthMemberName == '' || ForthMemberName <= 0) {
+                alert("Forth Member Name is Required!");
+                return false;
+            }
+            if (RequestedTeeTime.length <= 0) {
+                alert("Please select a time!");
+                return false;
+            }
+            if (RequestedStartDate.length <= 0) {
+                alert("Please select a start date!");
+                return false;
+            }
+            if (RequestedEndDate.length <= 0) {
+                alert("Please select an end date!");
+                return false;
+            }
+            return true;
+        }
+    </script>
+}
+
+
+<form name="StandingTeeTime" method="post">
+    <br />
+    <h style="color: white">If you wish to know the Member Number of any member, please enter full name below:</h>
+    <table>
+        <tr>
+            <td>ENter Member Name to get details:</td>
+            <td>
+                <input type="text" name="MemberName" id="MemberName" value="@Model.MemberName" />
+                @Html.ValidationMessage("MemberName")
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" name="Submit" value="GetMemberDetails" onclick="ValidateMemberName();" />
+            </td>
+        </tr>
+    </table>
+
+    @if (@Model.RequestedPlayer.Count > 0)
+    {
+        <div style="height: 150px; overflow: auto; width: 50%;">
+            <table>
+                @for (int i = 0; i < Model.RequestedPlayer.Count; ++i)
+                {
+                    <tr>
+                        <td>Member Name: @Model.RequestedPlayer[i].MemberName </td>
+
+                        <td>Membership Level @Model.RequestedPlayer[i].MembershipLevel</td>
+
+                        <td>Member Number @Model.RequestedPlayer[i].MemberNumber</td>
+
+                        <td>Phone Number @Model.RequestedPlayer[i].PhoneNumber</td>
+                    </tr>
+                }
+            </table>
+        </div>
+    }
+    <br /><br />
+
+    <h style="color: white">Fill in the form below to submit a standing Tee Time Request:</h>
+    <table>
+        <tr>
+            <td>
+                FirstMemberNumber:
+                <input type="text" name="FirstMemberNumber" id="FirstMemberNumber" value="@Model.FirstMemberNumber" />
+                @Html.ValidationMessage("FirstMemberNumber")
+            </td>
+
+            <td>
+                FirstMemberName:
+                <input type="text" name="FirstMemberName" id="FirstMemberName" value="@Model.FirstMemberName" />
+                @Html.ValidationMessage("FirstMemberName")
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>
+                SecondMemberNumber:
+                <input type="text" name="SecondMemberNumber" id="SecondMemberNumber" value="@Model.SecondMemberNumber" />
+                @Html.ValidationMessage("SecondMemberNumber")
+            </td>
+
+            <td>
+                SecondMemberName:
+                <input type="text" name="SecondMemberName" id="SecondMemberName" value="@Model.SecondMemberName" />
+                @Html.ValidationMessage("SecondMemberName")
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>
+                ThirdMemberNumber:
+                <input type="text" name="ThirdMemberNumber" id="ThirdMemberNumber" value="@Model.ThirdMemberNumber" />
+                @Html.ValidationMessage("ThirdMemberNumber")
+            </td>
+
+            <td>
+                ThirdMemberName:
+                <input type="text" name="ThirdMemberName" id="ThirdMemberName" value="@Model.ThirdMemberName" />
+                @Html.ValidationMessage("ThirdMemberName")
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                ForthMemberNumber:
+                <input type="text" name="ForthMemberNumber" id="ForthMemberNumber" value="@Model.ForthMemberNumber" />
+                @Html.ValidationMessage("ForthMemberNumber")
+            </td>
+
+            <td>
+                ForthMemberName:
+                <input type="text" name="ForthMemberName" id="ForthMemberName" value="@Model.ForthMemberName" />
+                @Html.ValidationMessage("ForthMemberName")
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>
+                RequestedDayOfWeek:
+
+                <select name="RequestedDayOfWeek" value="@Model.RequestedDayOfWeek">
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                    <option value="Saturday">Saturday</option>
+                    <option value="Sunday">Sunday</option>
+
+                </select>
+            </td>
+            <td>
+                <input type="submit" name="Submit" value="ShowAvailableTimes" />
+            </td>
+
+
+        </tr>
+        <tr>
+
+            <td>
+                RequestTeeTime:
+
+                <select name="RequestedTeeTime" id="RequestedTeeTime">
+                    @for (int i = 0; i < Model.timesavailable.Count; ++i)
+                    {
+                        <option value=@Model.timesavailable[i]>@Model.timesavailable[i]</option>
+
+                    }
+                </select>
+                @Html.ValidationMessage("RequestedTeeTime")
+            </td>
+        </tr>
+        <tr>
+            <td>
+                RequestedStartDate:
+                <input type="date" name="RequestedStartDate" id="dateControl" value="@Model.RequestedStartDate" />
+                @Html.ValidationMessage("RequestedStartDate")
+            </td>
+        </tr>
+        <tr>
+            <td>
+                RequestedEndDate:
+                <input type="date" name="RequestedEndDate" id="dateControl1" value="@Model.RequestedEndDate" />
+                @Html.ValidationMessage("RequestedEndDate")
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" name="Submit" value="SubmitRequest" onclick="Validate();" />
+            </td>
+
+        </tr>
+
+    </table>
+</form>
+
+<p style="color:white;">      @Model.Message</p>
+     

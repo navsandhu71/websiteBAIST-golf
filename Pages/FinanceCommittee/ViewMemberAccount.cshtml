@@ -1,0 +1,176 @@
+﻿@page
+@model GolfClubWebsite.Pages.FinanceCommittee.ViewMemberAccountModel
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "MemberAccount Page";
+}
+
+@section headerContent
+{
+    <h1>Welcome to the Member Account Page of Club BAIST System</h1>
+}
+
+
+
+@section styleSection
+{
+<style>
+    table, td, th, tr {
+        border: 1px solid Black;
+        border-collapse: collapse;
+        text-align: left;
+        padding: 8px;
+        background-color: whitesmoke;
+    }
+
+    .CoverPage {
+        background-image: url("../Images/FinanceImage.jpg");
+        /* Full height */
+        height: 100%;
+        /* Center and scale the image nicely */
+
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
+}
+
+@section scriptcontent
+{
+    <script type="text/javascript">
+        function ValidateMemberNumber() {
+            var MemberNumber = window.document.getElementById("MemberNumber").value;
+
+            if (MemberNumber == '' || MemberNumber.length <= 0) {
+                alert("Member Number is Required!");
+                return false;
+            }
+
+            return true;
+        }
+
+        function ValidateMemberName() {
+            var MemberName = window.document.getElementById("MemberName").value;
+
+            if (MemberName == '' || MemberName.length <= 0) {
+                alert("Member Name is Required!");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+}
+
+<html>
+<body>
+    <form name="ViewMemberAccount" method="post">
+
+        <table>
+            <tr>
+                <td>ENter Member Name to get details:</td>
+                <td>
+                    <input type="text" name="MemberName" id="MemberName" />
+                    @Html.ValidationMessage("MemberName")
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" name="Submit" value="GetMemberDetails" onclick="ValidateMemberName();" />
+                </td>
+            </tr>
+        </table>
+
+        @if (@Model.RequestedPlayer.Count > 0)
+        {
+            <div style="height: 150px; overflow: auto; width: 50%;">
+                <table>
+                    <tr>
+                        <th>Member Name</th>
+                        <th>Membership Level</th>
+                        <th>Member Number</th>
+                        <th>Phone Number</th>
+                    </tr>
+                    @for (int i = 0; i < Model.RequestedPlayer.Count; ++i)
+                    {
+                        <tr>
+                            <td>@Model.RequestedPlayer[i].MemberName </td>
+
+                            <td>@Model.RequestedPlayer[i].MembershipLevel</td>
+
+                            <td>@Model.RequestedPlayer[i].MemberNumber</td>
+
+                            <td>@Model.RequestedPlayer[i].PhoneNumber</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        }
+
+        <br />
+        <br />
+
+        <table>
+
+            <tr>
+                <td>
+                    Enter Member Number to view Member's Account:  <input type="text" name="MemberNumber" id="MemberNumber" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" name="Submit" value="ViewMemberAccount" onclick="ValidateMemberNumber();" />
+                    @Html.ValidationMessage("MemberNumber")
+                </td>
+            </tr>
+        </table>
+        <br />
+
+        @if (Model.AccountInfo.Count > 0)
+        {
+            <header>
+                <h1>Member Account</h1>
+            </header>
+            <table>
+                <tr>
+                    <td>MemberName</td>
+                    <td>@Model.AccountInfo[0].MemberName</td>
+                </tr>
+                <tr>
+                    <td>AccountNumber</td>
+                    <td>@Model.AccountInfo[0].AccountNumber</td>
+                </tr>
+                <tr>
+                    <td>Balance:</td>
+                    <td>@String.Format("{0:0.00}", @Model.AccountInfo[0].AccountBalance)</td>
+                </tr>
+            </table>
+
+            <table>
+                <tr>
+                    <th>WhenBooked</th>
+                    <th>WhenCharged</th>
+                    <th>ActivityDescription</th>
+                    <th>ActivityAmount</th>
+
+                </tr>
+
+                @for (int i = 0; i < Model.AccountInfo.Count; ++i)
+                {
+                    <tr>
+                        <td>@Model.AccountInfo[i].WhenBooked</td>
+                        <td>@Model.AccountInfo[i].WhenCharged</td>
+                        <td>@Model.AccountInfo[i].TransactionDescription</td>
+                        <td>@Model.AccountInfo[i].TransactionAmount.ToString("C")</td>
+
+                    </tr>
+                }
+            </table>
+            <br />
+
+
+
+        }
+    </form>
+</body>
+</html>

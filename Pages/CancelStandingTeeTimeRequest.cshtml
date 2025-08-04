@@ -1,0 +1,163 @@
+﻿@page
+@model GolfClubWebsite.Pages.CancelStandingTeeTimeRequestModel
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "CancelStandingTeeTime Page";
+}
+
+@section headerContent
+{
+    <h1>Cancel Standing Tee Time Request!</h1>
+}
+
+@section styleSection
+{
+<style>
+    table {
+        background-color: whitesmoke;
+    }
+
+    table, td, th, tr {
+        border: 1px solid Black;
+        border-collapse: collapse;
+        text-align: center;
+        padding: 8px;
+        border-collapse: collapse;
+    }
+
+        table tr:not(:first-child):hover {
+            background-color: rosybrown
+        }
+
+    tr {
+        cursor: pointer;
+        transition: all .25s ease-in-out
+    }
+
+    .selected {
+        background-color: maroon;
+        color: white;
+    }
+
+
+    .CoverPage {
+        background-image: url("./Images/StandingTeeTimeImage.jpg");
+        /* Full height */
+        height: 100%;
+        /* Center and scale the image nicely */
+
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
+}
+
+@section navigationContent
+{
+
+    <a href="~/Welcome">Back to Member Portal</a>
+    <a href="~/Logout">Logout</a>
+}
+
+@section scriptcontent
+{
+    <script type="text/javascript">
+        function Validate() {
+            var RequestNumber = window.document.getElementById("RequestNumber").value;
+
+            if (RequestNumber == '' || RequestNumber <= 0) {
+                alert("Request Number Required to cancel standing tee time request!");
+                return false;
+            }
+            return true;
+        }
+    </script>
+}
+
+<form name="FindRequestedStandingTeeTime" method="post">
+    <br />
+    <h style="color: white;"> Click on the button below to see the submitted standing tee time Request.</h>
+    <br />
+    <input type="submit" name="Submit" value="ShowStandingTeeTimeRequest" />
+</form>
+<br />
+
+
+@if (Model.standingTeeTimeRequest.RequestNumber > 0)
+{
+    <table id="table">
+        <thead>Select a time to Cancel: </thead>
+        <tr>
+            <th>RequestNumber</th>
+            <th>FirstMemberName</th>
+            <th>SecondMemberName</th>
+            <th>ThirdMemberName</th>
+            <th>ForthMemberName</th>
+            <th>RequestedDay</th>
+            <th>RequestedTeeTime</th>
+        </tr>
+
+        <tr>
+
+            <td>@Model.standingTeeTimeRequest.RequestNumber</td>
+            <td>@Model.standingTeeTimeRequest.FirstMemberName</td>
+            <td>@Model.standingTeeTimeRequest.SecondMemberName</td>
+            <td>@Model.standingTeeTimeRequest.ThirdMemberName</td>
+            <td>@Model.standingTeeTimeRequest.ForthMemberName</td>
+            <td>@Model.standingTeeTimeRequest.RequestedDayOfWeek</td>
+            <td>@Model.standingTeeTimeRequest.RequestedTime</td>
+        </tr>
+        }
+    </table>
+
+
+    <script>
+        //get selected row
+        //display selected row data in text input
+        function addRowHandlers() {
+
+            var table = document.getElementById("table"), rIndex;
+
+            for (var i = 0; i < table.rows.length; i++) {
+                table.rows[i].onclick = function () {
+
+                    if (typeof rIndex !== "undefined") {
+                        table.rows[rIndex].classList.toggle("selected");
+                    }
+                    rIndex = this.rowIndex;
+                    this.classList.toggle("selected");
+                    console.log(rIndex);
+
+                    document.getElementById("RequestNumber").value = this.cells[0].innerHTML;
+
+                };
+            }
+        }
+        window.onload = addRowHandlers;
+    </script>
+
+}
+<br />
+<br />
+<form name="CancelRequest" method="post" onsubmit="Validate();">
+
+    <table>
+        <tr>
+            <td style="color: white;">RequestNumber: </td>
+            <td>
+                <input type="text" name="RequestNumber" id="RequestNumber" value="@Model.standingTeeTimeRequest.RequestNumber" />
+                @Html.ValidationMessage("RequestNumber")
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <input type="submit" name="Submit" value="CancelStandingTeeTimeRequest" />
+
+            </td>
+        </tr>
+    </table>
+</form>
+
+
+@Model.Message

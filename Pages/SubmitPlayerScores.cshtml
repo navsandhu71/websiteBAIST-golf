@@ -1,0 +1,449 @@
+﻿@page
+@model GolfClubWebsite.Pages.SubmitPlayerScoresModel
+
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "SubmitPlayerScore Page";
+}
+
+@section headerContent
+{
+    <h1>Enter the adjusted scores below:</h1>
+}
+
+@section navigationContent
+{
+
+    <a href="~/Welcome">Back to Member Portal</a>
+    <a href="~/Logout">Logout</a>
+}
+
+@section styleSection
+{
+<style>
+    table, td, th, tr {
+        border: 1px solid Black;
+        border-collapse: collapse;
+        text-align: left;
+        padding: 8px;
+        background-color: whitesmoke;
+    }
+
+    .CoverPage {
+        background-image: url("./Images/SubmitScoresImage.jpeg");
+        /* Full height */
+        height: 100%;
+        /* Center and scale the image nicely */
+
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
+}
+
+<div style="float:right">
+    <table>
+        <tr>
+            <td>Member Name: </td>
+            <td>@Model.playername</td>
+        </tr>
+        <tr>
+            <td>Membership Level</td>
+            <td>@Model.membershipLevel</td>
+        </tr>
+        <tr>
+            <td>Member Number</td>
+            <td>@Model.playerNumber</td>
+        </tr>
+        <tr>
+            <td>Role</td>
+            <td>@Model.Role</td>
+        </tr>
+    </table>
+</div>
+
+@section scriptcontent
+{
+    <script type="text/javascript">
+        function Validate(aForm) {
+            var CourseRating = aForm.CourseRating.value;
+            var SlopeRating = aForm.SlopeRating.value;
+            var Hole1Scores = aForm.Hole1Scores.value;
+            var Hole2Scores = aForm.Hole2Scores.value;
+            var Hole3Scores = aForm.Hole3Scores.value;
+            var Hole4Scores = aForm.Hole4Scores.value;
+            var Hole5Scores = aForm.Hole5Scores.value;
+            var Hole6Scores = aForm.Hole6Scores.value;
+            var Hole7Scores = aForm.Hole7Scores.value;
+            var Hole8Scores = aForm.Hole8Scores.value;
+            var Hole9Scores = aForm.Hole9Scores.value;
+            var Hole10Scores = aForm.Hole10Scores.value;
+            var Hole11Scores = aForm.Hole11Scores.value;
+            var Hole12Scores = aForm.Hole12Scores.value;
+            var Hole13Scores = aForm.Hole13Scores.value;
+            var Hole14Scores = aForm.Hole14Scores.value;
+            var Hole15Scores = aForm.Hole15Scores.value;
+            var Hole16Scores = aForm.Hole16Scores.value;
+            var Hole17Scores = aForm.Hole17Scores.value;
+            var Hole18Scores = aForm.Hole18Scores.value;
+            var GolfDate = aForm.GolfDate.value;
+
+
+            if (CourseRating.length <= 0 || CourseRating <= 0) {
+                alert("Course Rating Required!");
+                return false;
+            }
+
+            if (SlopeRating.length <= 0 || SlopeRating <= 0) {
+                alert("Slope Rating Required!");
+                return false;
+            }
+
+            if (GolfDate.length <= 0) {
+                alert("Select a valid date to record scores!");
+                return false;
+            }
+
+            if (Hole1Scores.length <= 0 || Hole1Scores <= 0) {
+                alert("Hole 1 Scores Required!");
+                return false;
+            }
+
+            if (Hole2Scores.length <= 0 || Hole2Scores <= 0) {
+                alert("Hole 2 Scores Required!");
+                return false;
+            }
+            if (Hole3Scores.length <= 0 || Hole3Scores <= 0) {
+                alert("Hole 3 Scores Required!");
+                return false;
+            }
+            if (Hole4Scores.length <= 0 || Hole4Scores <= 0) {
+                alert("Hole 4 Scores Required!");
+                return false;
+            }
+            if (Hole5Scores.length <= 0 || Hole5Scores <= 0) {
+                alert("Hole 5 Scores Required!");
+                return false;
+            }
+            if (Hole6Scores.length <= 0 || Hole6Scores <= 0) {
+                alert("Hole 6 Scores Required!");
+                return false;
+            }
+            if (Hole7Scores.length <= 0 || Hole7Scores <= 0) {
+                alert("Hole 7 Scores Required!");
+                return false;
+            }
+            if (Hole8Scores.length <= 0 || Hole8Scores <= 0) {
+                alert("Hole 8 Scores Required!");
+                return false;
+            }
+            if (Hole9Scores.length <= 0 || Hole9Scores <= 0) {
+                alert("Hole 9 Scores Required!");
+                return false;
+            }
+            if (Hole10Scores.length <= 0 || Hole10Scores <= 0) {
+                alert("Hole 10 Scores Required!");
+                return false;
+            }
+            if (Hole11Scores.length <= 0 || Hole11Scores <= 0) {
+                alert("Hole 11 Scores Required!");
+                return false;
+            }
+            if (Hole12Scores.length <= 0 || Hole12Scores <= 0) {
+                alert("Hole 12 Scores Required!");
+                return false;
+            }
+            if (Hole13Scores.length <= 0 || Hole13Scores <= 0) {
+                alert("Hole 13 Scores Required!");
+                return false;
+            }
+            if (Hole14Scores.length <= 0 || Hole14Scores <= 0) {
+                alert("Hole 14 Scores Required!");
+                return false;
+            }
+            if (Hole15Scores.length <= 0 || Hole15Scores <= 0) {
+                alert("Hole 15 Scores Required!");
+                return false;
+            }
+            if (Hole16Scores.length <= 0 || Hole16Scores <= 0) {
+                alert("Hole 16 Scores Required!");
+                return false;
+            }
+            if (Hole17Scores.length <= 0 || Hole17Scores <= 0) {
+                alert("Hole 17 Scores Required!");
+                return false;
+            }
+            if (Hole18Scores.length <= 0 || Hole18Scores <= 0) {
+                alert("Hole 18 Scores Required!");
+                return false;
+            }
+
+            return true;
+
+        }
+
+    </script>
+}
+<html>
+<body>
+    <form name="SubmitPlayerScores" method="post" onsubmit="Validate(window.document.SubmitPlayerScores);">
+        <table style="overflow: auto;">
+            <tr>
+                <td>MemberNumber: </td>
+                <td>@Model.playerNumber</td>
+            </tr>
+            <tr>
+                <td>GolfCourse: </td>
+                <td>
+                    <input type="text" name="GolfCourse" value="Club BAIST" readonly />
+                </td>
+            </tr>
+            <tr>
+                <td>CourseRating: </td>
+                <td>
+                    <input type="text" name="CourseRating" value="@Model.CourseRating" />
+                    @Html.ValidationMessage("CourseRating")
+                </td>
+            </tr>
+            <tr>
+                <td>SlopeRating: </td>
+                <td>
+                    <input type="text" name="SlopeRating" value="@Model.SlopeRating" />
+                    @Html.ValidationMessage("SlopeRating")
+                </td>
+            </tr>
+            <tr>
+                <td>GolfDate: </td>
+                <td>
+                    <input type="date" name="GolfDate" value="@Model.GolfDate" />
+                    @Html.ValidationMessage("GolfDate")
+                </td>
+            </tr>
+        </table>
+
+        <table>
+
+            <tr>
+                <th>HoleNumber</th>
+                <th>HolePar</th>
+                <th>AdjustedScores</th>
+
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>
+                    <input type="text" name="Hole1Par" value="4" readonly />
+                </td>
+                <td>
+                    <input type="text" name="Hole1Scores" value="@Model.Hole1Scores" />
+                    @Html.ValidationMessage("Hole1Scores")
+                </td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>
+                    <input type="text" name="Hole2Par" value="5" readonly />
+                </td>
+
+                <td>
+                    <input type="text" name="Hole2Scores" value="@Model.Hole2Scores" />
+                    @Html.ValidationMessage("Hole2Scores")
+                </td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>
+                    <input type="text" name="Hole3Par" value="3" readonly />
+                </td>
+
+                <td>
+                    <input type="text" name="Hole3Scores" value="@Model.Hole3Scores" />
+                    @Html.ValidationMessage("Hole3Scores")
+                </td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>
+                    <input type="text" name="Hole4Par" value="4" readonly />
+                </td>
+
+                <td>
+                    <input type="text" name="Hole4Scores" value="@Model.Hole4Scores" />
+                    @Html.ValidationMessage("Hole4Scores")
+                </td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>
+                    <input type="text" name="Hole5Par" value="4" readonly />
+                </td>
+
+                <td>
+                    <input type="text" name="Hole5Scores" value="@Model.Hole5Scores" />
+                    @Html.ValidationMessage("Hole5Scores")
+                </td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>
+                    <input type="text" name="Hole6Par" value="4" readonly />
+                </td>
+
+                <td>
+                    <input type="text" name="Hole6Scores" value="@Model.Hole6Scores" />
+                    @Html.ValidationMessage("Hole6Scores")
+                </td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>
+                    <input type="text" name="Hole7Par" value="3/4" readonly />
+                </td>
+
+                <td>
+                    <input type="text" name="Hole7Scores" value="@Model.Hole7Scores" />
+                    @Html.ValidationMessage("Hole7Scores")
+                </td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>
+                    <input type="text" name="Hole8Par" value="5" readonly />
+                </td>
+
+                <td>
+                    <input type="text" name="Hole8Scores" value="@Model.Hole8Scores" />
+                    @Html.ValidationMessage("Hole8Scores")
+                </td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>
+                    <input type="text" name="Hole9Par" value="4" readonly />
+                </td>
+
+                <td>
+                    <input type="text" name="Hole9Scores" value="@Model.Hole9Scores" />
+                    @Html.ValidationMessage("Hole9Scores")
+                </td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>
+                    <input type="text" name="Hole10Par" value="4" readonly />
+                </td>
+
+                <td>
+                    <input type="text" name="Hole10Scores" value="@Model.Hole10Scores" />
+                    @Html.ValidationMessage("Hole10Scores")
+                </td>
+            </tr>
+            <tr>
+                <td>11</td>
+                <td>
+                    <input type="text" name="Hole11Par" value="4" readonly />
+                </td>
+
+                <td>
+                    <input type="text" name="Hole11Scores" value="@Model.Hole11Scores" />
+                    @Html.ValidationMessage("Hole11Scores")
+                </td>
+            </tr>
+            <tr>
+                <td>12</td>
+                <td>
+                    <input type="text" name="Hole12Par" value="3" readonly />
+                </td>
+
+                <td>
+                    <input type="text" name="Hole12Scores" value="@Model.Hole12Scores" />
+                    @Html.ValidationMessage("Hole12Scores")
+                </td>
+            </tr>
+            <tr>
+                <td>13</td>
+                <td>
+                    <input type="text" name="Hole13Par" value="5" readonly />
+                </td>
+
+                <td>
+                    <input type="text" name="Hole13Scores" value="@Model.Hole13Scores" />
+                    @Html.ValidationMessage("Hole13Scores")
+                </td>
+            </tr>
+            <tr>
+                <td>14</td>
+                <td>
+                    <input type="text" name="Hole14Par" value="4" readonly />
+                </td>
+
+                <td>
+                    <input type="text" name="Hole14Scores" value="@Model.Hole14Scores" />
+                    @Html.ValidationMessage("Hole14Scores")
+                </td>
+            </tr>
+            <tr>
+                <td>15</td>
+                <td>
+                    <input type="text" name="Hole15Par" value="4" readonly />
+                </td>
+
+                <td>
+                    <input type="text" name="Hole15Scores" value="@Model.Hole15Scores" />
+                    @Html.ValidationMessage("Hole15Scores")
+                </td>
+            </tr>
+            <tr>
+                <td>16</td>
+                <td>
+                    <input type="text" name="Hole16Par" value="3" readonly />
+                </td>
+
+                <td>
+                    <input type="text" name="Hole16Scores" value="@Model.Hole16Scores" />
+                    @Html.ValidationMessage("Hole16Scores")
+                </td>
+            </tr>
+            <tr>
+                <td>17</td>
+                <td>
+                    <input type="text" name="Hole17Par" value="4/5" readonly />
+                </td>
+
+                <td>
+                    <input type="text" name="Hole17Scores" value="@Model.Hole17Scores" />
+                    @Html.ValidationMessage("Hole17Scores")
+                </td>
+            </tr>
+            <tr>
+                <td>18</td>
+                <td>
+                    <input type="text" name="Hole18Par" value="4" readonly />
+                </td>
+
+                <td>
+                    <input type="text" name="Hole18Scores" value="@Model.Hole18Scores" />
+                    @Html.ValidationMessage("Hole18Scores")
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="text" name="TotalPar" value="Total Par: 71/73" /></td>
+                <td>
+                    <input type="text" name="TotalScore" value="Total Scores:" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" style="text-align: center;">
+                    <input type="submit" name="Submit" value="SubmitScores" />
+                </td>
+            </tr>
+        </table>
+
+
+    </form>
+
+    @Model.Message
+</body>
+</html>

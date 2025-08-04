@@ -1,0 +1,73 @@
+﻿@page
+@model GolfClubWebsite.Pages.WelcomeModel
+
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Welcome Page";
+}
+
+@section headerContent
+{
+    <h1>Welcome to the Member Portal of Club BAIST System</h1>
+}
+
+@section styleSection
+{
+<style>
+    table, td, th, tr {
+        border: 1px solid Black;
+        border-collapse: collapse;
+        text-align: left;
+        padding: 8px;
+    }
+    .CoverPage {
+        background-image: url("./Images/ClerkWelcomePage.jpg");
+        /* Full height */
+        height: 100%;
+        /* Center and scale the image nicely */
+
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
+
+}
+
+<div style="float: right">
+    <table>
+        <tr>
+            <td>Member Name: </td>
+            <td>@Model.playername</td>
+        </tr>
+        <tr>
+            <td>Membership Level</td>
+            <td>@Model.membershipLevel</td>
+        </tr>
+        <tr>
+            <td>Member Number</td>
+            <td>@Model.playerNumber</td>
+        </tr>
+
+        <tr>
+            <td>Role</td>
+            <td>@Model.Role</td>
+        </tr>
+    </table>
+</div>
+
+
+@section navigationContent
+{
+    <button><a href="BookTeeTime">Book TeeTime</a></button>
+    <button><a href="ModifyTeeTime">Modify Tee Time</a></button>
+    @if (Model.membershipLevel == "Gold" && Model.Role == "shareholder")
+    {
+
+        <button><a href="StandingTeeTimeRequests"> Standing Time Request</a></button>
+        <button><a href="CancelStandingTeeTimeRequest">Cancel Standing Time Request</a></button>
+    }
+    <button><a href="SubmitPlayerScores">SubmitPlayerScores</a></button>
+    <button><a href="ViewPlayerHandicap">View Player Handicap</a></button>
+    <button><a href="Logout">Logout</a></button>
+ }

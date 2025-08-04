@@ -1,0 +1,314 @@
+﻿@page
+@model GolfClubWebsite.Pages.Clerk.ClerkBookTeeTimeModel
+
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "ClerkPortal";
+}
+
+
+@section headerContent
+{
+    <h1>Welcome to the Book Tee Time Page of Club BAIST System</h1>
+}
+
+@section navigationContent
+{
+
+    <a href="~/Clerk/ClerkPortal">Back to Clerk Portal</a>
+}
+
+@section styleSection
+{
+<style>
+    table {
+        background-color: whitesmoke;
+    }
+
+    table, td, th, tr {
+        border: 1px solid Black;
+        border-collapse: collapse;
+        text-align: center;
+        padding: 8px;
+        border-collapse: collapse;
+    }
+
+        table tr:not(:first-child):hover {
+            background-color: rosybrown
+        }
+
+    tr {
+        cursor: pointer;
+        transition: all .25s ease-in-out
+    }
+
+    .selected {
+        background-color: maroon;
+        color: white;
+    }
+
+
+    .CoverPage {
+        background-image: url("../Images/ModifyTeeTimeImage.jpeg");
+        /* Full height */
+        height: 100%;
+        /* Center and scale the image nicely */
+        /*   background-position: inherit;*/
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
+
+}
+
+
+@section scriptcontent
+{
+
+    <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+
+            var dtToday = new Date();
+
+            var month = dtToday.getMonth() + 1;
+
+            var day = dtToday.getDate() + 1;
+
+            var day1 = day + 6;
+
+            var year = dtToday.getFullYear();
+
+            if (month < 10)
+                month = '0' + month.toString();
+
+            if (day < 10)
+                day = '0' + day.toString();
+
+            var minDate = year + '-' + month + '-' + day;
+
+            var maxDate = year + '-' + month + '-' + day1;
+
+            $('#dateControl').attr('min', minDate);
+            $('#dateControl').attr('max', maxDate);
+        })
+
+
+
+    </script>
+
+    <script type="text/javascript">
+        function Validate() {
+            var InputFieldTime = window.document.getElementById("InputFieldTime").value;
+
+            if (InputFieldTime.length <= 0) {
+                alert("Select a valid tee time from the Tee Sheet!");
+                return false;
+            }
+
+
+            return true;
+        }
+
+        function ValidateDate() {
+            var InputFieldDate = window.document.getElementById("dateControl").value;
+
+            if (InputFieldDate.length <= 0) {
+                alert("Select a valid date to display the tee sheet!");
+                return false;
+            }
+
+            return true;
+        }
+
+        function ValidateMemberID() {
+            var MemberID = window.document.getElementById("MemberNumber").value;
+
+            if (MemberID.length <= 0 || MemberID == '') {
+                alert("A valid memberID required!");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+}
+
+
+<form name="FindMember" method="post" onsubmit="ValidateMemberID();">
+    <table>
+        <tr>
+            <td>Member Number: </td>
+            <td>
+                <input type="text" name="MemberNumber" id="MemberNumber" value="@Model.MemberNumber" />
+                @Html.ValidationMessage("MemberNumber")
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" name="Submit" value="Find Member" />
+            </td>
+        </tr>
+    </table>
+</form>
+
+@if (Model.MemberName != null)
+{
+    <table>
+        <tr>
+            <td>Member Number: </td>
+            <td>@Model.PlayerNumber</td>
+        </tr>
+        <tr>
+            <td>Member Name: </td>
+            <td>@Model.MemberName</td>
+        </tr>
+        <tr>
+            <td>Membership Level: </td>
+            <td>@Model.MembershipLevel</td>
+        </tr>
+        <tr>
+            <td>Member Role: </td>
+            <td>@Model.MemberRole</td>
+        </tr>
+
+
+    </table>
+
+
+
+    <form id="DailyTeeSheetForm" name="DailyTeeSheetForm" method="post" onsubmit="ValidateDate();">
+
+        <table>
+
+            <tr>
+                <td>Enter Date to request daily tee sheet: </td>
+                <td>
+                    <input type="date" name="InputFieldDate" id="dateControl" value="@Model.InputFieldDate" />
+                    @Html.ValidationMessage("InputFieldDate")
+                </td>
+                @*<td><input type="text" name="InputFieldDate" value="@Model.InputFieldDate" /></td>*@
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" name="Submit" value="GetDailyTeeSheet" />
+                </td>
+
+            </tr>
+
+        </table>
+        <br />
+
+
+    </form>
+    @if (@Model.RequestedTeeSheet.GolfTeeTimes.Count > 0)
+    {
+
+        <h1>Select a time from the sheet below to book and fill in the details below:</h1>
+        <div style="height: 400px; overflow: auto">
+            <table id="table">
+
+                <tr>
+                    <td>Date: </td>
+                    <td>@Model.RequestedTeeSheet.Date</td>
+                    <td>Day of Week: </td>
+                    <td>@Model.RequestedTeeSheet.DayOfWeek</td>
+                </tr>
+                <tr>
+
+                    <th>Golf Time</th>
+                    <th>Player 1</th>
+                    <th>BookingTimePlayer1</th>
+                    <th>Player 2</th>
+                    <th>BookingTimePlayer2</th>
+                    <th>Player 3</th>
+                    <th>BookingTimePlayer3</th>
+                    <th>Player 4</th>
+                    <th>BookingTimePlayer4</th>
+                    <th>No of Carts</th>
+
+
+                </tr>
+                @for (int i = 0; i < Model.RequestedTeeSheet.GolfTeeTimes.Count; ++i)
+                {
+
+                    <tr>
+
+                        <td>@Model.RequestedTeeSheet.GolfTeeTimes[i].Time</td>
+                        <td>@Model.RequestedTeeSheet.GolfTeeTimes[i].Member1Name</td>
+                        <td>@Model.RequestedTeeSheet.GolfTeeTimes[i].BookingDate1</td>
+                        <td>@Model.RequestedTeeSheet.GolfTeeTimes[i].Member2Name</td>
+                        <td>@Model.RequestedTeeSheet.GolfTeeTimes[i].BookingDate2</td>
+                        <td>@Model.RequestedTeeSheet.GolfTeeTimes[i].Member3Name</td>
+                        <td>@Model.RequestedTeeSheet.GolfTeeTimes[i].BookingDate3</td>
+                        <td>@Model.RequestedTeeSheet.GolfTeeTimes[i].Member4Name</td>
+                        <td>@Model.RequestedTeeSheet.GolfTeeTimes[i].BookingDate4</td>
+                        <td>@Model.RequestedTeeSheet.GolfTeeTimes[i].NoOfCarts</td>
+
+
+                    </tr>
+                }
+
+            </table>
+        </div>
+        <script>
+            //get selected row
+            //display selected row data in text input
+            function addRowHandlers() {
+
+                var table = document.getElementById("table"), rIndex;
+
+                for (var i = 0; i < table.rows.length; i++) {
+                    table.rows[i].onclick = function () {
+
+                        if (typeof rIndex !== "undefined") {
+                            table.rows[rIndex].classList.toggle("selected");
+                        }
+                        rIndex = this.rowIndex;
+                        this.classList.toggle("selected");
+                        console.log(rIndex);
+
+                        document.getElementById("InputFieldTime").value = this.cells[0].innerHTML;
+                    };
+                }
+            }
+            window.onload = addRowHandlers;
+        </script>
+    }
+    <br />
+    <br />
+    <form name="BookTeeTime" method="post" onsubmit="Validate();">
+        <table>
+            <tr>
+                <td>
+                    Date:
+                    <input type="text" name="GolfDate" id="GolfDate" value="@Model.GolfDate.ToString("yyyy/M/d")" readonly />
+                </td>
+                <td>
+                    Tee Time
+                    <input type="text" name="InputFieldTime" id="InputFieldTime" value="@Model.InputFieldTime" readonly />
+                    @Html.ValidationMessage("InputFieldTime")
+                </td>
+                <td>
+                    Member Name:
+                    <input type="text" name="playerName" value="@Model.MemberName" readonly />
+                </td>
+                <td>
+                    No Of Carts:
+                    <input type="text" name="TotalCarts" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" name="Submit" value="BookTeeTime" />
+                </td>
+            </tr>
+        </table>
+    </form>
+    @Model.Confirmation
+    @Model.Message
+}

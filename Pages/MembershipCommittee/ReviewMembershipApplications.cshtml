@@ -1,0 +1,261 @@
+﻿@page
+@model GolfClubWebsite.Pages.MembershipCommittee.ReviewMembershipApplicationsModel
+
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "ReviewMembershipApplications Page";
+}
+
+@section headerContent
+{
+    <h1>Select an option below to review membership applications!</h1>
+}
+
+
+@section navigationContent
+{
+
+    <a href="~/MembershipCommittee/MembershipCommittee">Back to MembershipCommittee Portal</a>
+}
+
+@section scriptcontent
+{
+    <script type="text/javascript">
+        function Validate() {
+            var ApplicationNumber = window.document.getElementById("ApplicationNumber").value;
+
+            if (ApplicationNumber == '' || ApplicationNumber <= 0) {
+                alert("Application Number Required!");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+}
+
+@section styleSection
+{
+    <style>
+        table, td, th, tr {
+            border: 1px solid Black;
+            border-collapse: collapse;
+            text-align: left;
+            padding: 8px;
+        }
+
+        .CoverPage {
+            background-image: url("../Images/ReviewApplication.jpg");
+            /* Full height */
+            height: 100%;
+            /* Center and scale the image nicely */
+
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+
+}
+
+
+<form name="ViewAllSubmittedApplications" method="post">
+    <table>
+        <tr>
+            <td>
+                <input type="submit" name="Submit" value="ViewOnHoldMembershipApplications" />
+            </td>
+            <td>
+                <input type="submit" name="Submit" value="ViewWaitlistedMembershipApplications" />
+            </td>
+        </tr>
+    </table>
+</form>
+
+@if (Model.MembershipApplications.Count > 0)
+{
+    <table>
+        <tr>
+            <th>ApplicationNumber</th>
+            <th>LastName</th>
+            <th>FirstName</th>
+            <th>Address</th>
+            <th>PostalCode</th>
+            <th>Phone</th>
+            <th>AlternatePhone</th>
+            <th>Email</th>
+            <th>DateOfBirth</th>
+            <th>Occupation</th>
+            <th>CompanyName</th>
+            <th>CompanyAddress</th>
+            <th>CompanyPostalCode</th>
+            <th>CompanyPhone</th>
+            <th>ApplicationDate</th>
+            <th>OnlineSubmissionDate</th>
+            <th>RequestedRole</th>
+            <th>FirstShareholderName</th>
+            <th>SecondShareholderName</th>
+            <th>ApplicationStatus</th>
+        </tr>
+
+        @for (int i = 0; i < Model.MembershipApplications.Count; ++i)
+        {
+            <tr>
+                <td>@Model.MembershipApplications[i].ApplicationNumber</td>
+                <td>@Model.MembershipApplications[i].LastName</td>
+                <td>@Model.MembershipApplications[i].FirstName</td>
+                <td>@Model.MembershipApplications[i].Address</td>
+                <td>@Model.MembershipApplications[i].PostalCode</td>
+                <td>@Model.MembershipApplications[i].Phone</td>
+                <td>@Model.MembershipApplications[i].AlternatePhone</td>
+                <td>@Model.MembershipApplications[i].Email</td>
+                <td>@Model.MembershipApplications[i].DateOfBirth</td>
+                <td>@Model.MembershipApplications[i].Occupation</td>
+                <td>@Model.MembershipApplications[i].CompanyName</td>
+                <td>@Model.MembershipApplications[i].CompanyAddress</td>
+                <td>@Model.MembershipApplications[i].CompanyPostalCode</td>
+                <td>@Model.MembershipApplications[i].CompanyPhone</td>
+                <td>@Model.MembershipApplications[i].ApplicationDate</td>
+                <td>@Model.MembershipApplications[i].OnlineSubmissionDate</td>
+                <td>@Model.MembershipApplications[i].RequestedRole</td>
+                <td>@Model.MembershipApplications[i].FirstShareholderName</td>
+                <td>@Model.MembershipApplications[i].SecondShareholderName</td>
+                <td>@Model.MembershipApplications[i].ApplicationStatus</td>
+            </tr>
+
+        }
+    </table>
+
+}
+
+@if (Model.WaitlistedMembershipApplications.Count > 0)
+{
+    <table>
+        <tr>
+            <th>ApplicationNumber</th>
+            <th>LastName</th>
+            <th>FirstName</th>
+            <th>Address</th>
+            <th>PostalCode</th>
+            <th>Phone</th>
+            <th>AlternatePhone</th>
+            <th>Email</th>
+            <th>DateOfBirth</th>
+            <th>Occupation</th>
+            <th>CompanyName</th>
+            <th>CompanyAddress</th>
+            <th>CompanyPostalCode</th>
+            <th>CompanyPhone</th>
+            <th>ApplicationDate</th>
+            <th>OnlineSubmissionDate</th>
+            <th>RequestedRole</th>
+            <th>FirstShareholderName</th>
+            <th>SecondShareholderName</th>
+            <th>ApplicationStatus</th>
+        </tr>
+
+        @for (int i = 0; i < Model.WaitlistedMembershipApplications.Count; ++i)
+        {
+            <tr>
+                <td>@Model.WaitlistedMembershipApplications[i].ApplicationNumber</td>
+                <td>@Model.WaitlistedMembershipApplications[i].LastName</td>
+                <td>@Model.WaitlistedMembershipApplications[i].FirstName</td>
+                <td>@Model.WaitlistedMembershipApplications[i].Address</td>
+                <td>@Model.WaitlistedMembershipApplications[i].PostalCode</td>
+                <td>@Model.WaitlistedMembershipApplications[i].Phone</td>
+                <td>@Model.WaitlistedMembershipApplications[i].AlternatePhone</td>
+                <td>@Model.WaitlistedMembershipApplications[i].Email</td>
+                <td>@Model.WaitlistedMembershipApplications[i].DateOfBirth</td>
+                <td>@Model.WaitlistedMembershipApplications[i].Occupation</td>
+                <td>@Model.WaitlistedMembershipApplications[i].CompanyName</td>
+                <td>@Model.WaitlistedMembershipApplications[i].CompanyAddress</td>
+                <td>@Model.WaitlistedMembershipApplications[i].CompanyPostalCode</td>
+                <td>@Model.WaitlistedMembershipApplications[i].CompanyPhone</td>
+                <td>@Model.WaitlistedMembershipApplications[i].ApplicationDate</td>
+                <td>@Model.WaitlistedMembershipApplications[i].OnlineSubmissionDate</td>
+                <td>@Model.WaitlistedMembershipApplications[i].RequestedRole</td>
+                <td>@Model.WaitlistedMembershipApplications[i].FirstShareholderName</td>
+                <td>@Model.WaitlistedMembershipApplications[i].SecondShareholderName</td>
+                <td>@Model.WaitlistedMembershipApplications[i].ApplicationStatus</td>
+            </tr>
+
+        }
+    </table>
+}
+
+
+<form name="ReviewApplication" method="post">
+    <table>
+        <tr>
+            <td>ApplicationNumber: </td>
+            <td>
+                <input type="text" name="ApplicationNumber" id="ApplicationNumber" value="@Model.ApplicationNumber" />
+                @Html.ValidationMessage("ApplicationNumber")
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>New Status:</td>
+            <td>
+
+                <select name="UpdatedStatus" id="UpdatedStatus">
+                    <option value="Waitlisted">Waitlist</option>
+                    <option value="Approved">Approve</option>
+                    <option value="Denied">Deny</option>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <input type="submit" name="Submit" value="SubmitDecision" onclick="Validate();" />
+            </td>
+        </tr>
+    </table>
+
+</form>
+
+
+@*<form name="ReviewApplication2" method="post">
+    <table>
+        <tr>
+            <td>ApplicationNumber: </td>
+            <td>
+                <input type="text" name="ApplicationNumber" id="ApplicationNumber" value="@Model.ApplicationNumber" />
+                @Html.ValidationMessage("ApplicationNumber")
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>New Status:</td>
+            <td>
+
+                <select name="UpdatedStatus" id="UpdatedStatus">
+                    <option value="Waitlisted">Waitlist</option>
+                    <option value="Approved">Approve</option>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <input type="submit" name="Submit" value="SubmitDecision" onclick="Validate();" />
+            </td>
+        </tr>
+    </table>
+        </form>*@
+@if (!string.IsNullOrEmpty(Model.newPlayer.MemberNumber) && !string.IsNullOrEmpty(Model.newPlayer.UserName))
+{
+    <table>
+        <tr>
+            <th>Member Number</th>
+            <th>User Name</th>
+        </tr>
+        <tr>
+            <td>@Model.newPlayer.MemberNumber</td>
+            <td>@Model.newPlayer.UserName</td>
+        </tr>
+    </table>
+}

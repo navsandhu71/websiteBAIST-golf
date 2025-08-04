@@ -1,0 +1,40 @@
+﻿@page
+@model GolfClubWebsite.Pages.IndexModel
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Index Page";
+}
+
+@section BackgroundImage
+{
+    <style>
+        .CoverPage {
+            /* The image used */
+            background-image: url("../Images/Image2.jpg");
+            /* Full height */
+            height: 100%;
+            /* Center and scale the image nicely */
+            /*   background-position: inherit;*/
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+
+
+}
+
+@section headerContent
+{
+    <h1>Welcome to the Club BAIST System</h1>
+}
+
+@section navigationContent
+{
+    <button><a href="~/RequestLogin">Member Portal</a></button>
+    <button><a href="~/Clerk/ClerkPortal">Clerk Portal</a></button>
+    <button><a href="~/ProShopStaff/ProshopStaff">ProShop Staff Portal</a></button>
+    <button><a href="~/MembershipCommittee/MembershipCommittee">Membership Committee Portal</a></button>
+    <button><a href="~/FinanceCommittee/ViewMemberAccount">Finance Committee Portal</a></button>
+}
+
